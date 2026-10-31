@@ -1,0 +1,3 @@
+# Runtime: Python 3.11+ standard library only (Tkinter ships with python.org installers).
+# Development / testing:
+pytest>=7.4
