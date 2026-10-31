@@ -1,0 +1,310 @@
+{
+  "source": "/tmp/sample/proj.zip",
+  "started": "2026-10-13T23:38:48.453547+00:00",
+  "finished": "2026-10-13T23:38:51.798970+00:00",
+  "host_python": "3.12.3",
+  "host_os": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+  "options": {
+    "languages": [
+      "csharp",
+      "java",
+      "javascript",
+      "python",
+      "sql",
+      "typescript",
+      "vbnet"
+    ],
+    "timeout_s": 180,
+    "approved_tools": [],
+    "use_pyright": true,
+    "sql_dialect": "ansi"
+  },
+  "languages_found": {
+    "csharp": 1,
+    "java": 1,
+    "javascript": 1,
+    "python": 2,
+    "sql": 1,
+    "typescript": 1
+  },
+  "summary": {
+    "total": 7,
+    "by_severity": {
+      "high": 4,
+      "medium": 3
+    },
+    "by_kind": {
+      "parser_error": 4,
+      "lint_warning": 2,
+      "type_error": 1
+    }
+  },
+  "findings": [
+    {
+      "analyzer": "eslint",
+      "kind": "parser_error",
+      "severity": "high",
+      "message": "Parsing error: Identifier 'a' has already been declared",
+      "file": "src/app.js",
+      "line": 2,
+      "column": 7,
+      "rule": "parse-error",
+      "language": "javascript",
+      "confidence": "medium",
+      "verification": "tool-reported",
+      "evidence": "Parsed as an ES module (CommonJS for .cjs); a classic script may be a false positive.",
+      "analyzer_version": "v9.39.5",
+      "id": "SA-61fa7d4eeb"
+    },
+    {
+      "analyzer": "tsc",
+      "kind": "parser_error",
+      "severity": "high",
+      "message": "')' expected.",
+      "file": "src/app.ts",
+      "line": 3,
+      "column": 1,
+      "rule": "TS1005",
+      "language": "typescript",
+      "confidence": "high",
+      "verification": "tool-reported",
+      "evidence": "",
+      "analyzer_version": "Version 6.0.3",
+      "id": "SA-e38ed31e83"
+    },
+    {
+      "analyzer": "python-ast",
+      "kind": "parser_error",
+      "severity": "high",
+      "message": "invalid syntax",
+      "file": "src/bad.py",
+      "line": 1,
+      "column": 12,
+      "rule": "SyntaxError",
+      "language": "python",
+      "confidence": "high",
+      "verification": "tool-reported",
+      "evidence": "def broken(:",
+      "analyzer_version": "Python 3.12.3 ast",
+      "id": "SA-0c035b1f68"
+    },
+    {
+      "analyzer": "sqlfluff",
+      "kind": "parser_error",
+      "severity": "high",
+      "message": "Line 1, Position 1: Found unparsable section: 'SELEC * FROM t WHERE;'",
+      "file": "src/q.sql",
+      "line": 1,
+      "column": 1,
+      "rule": "PRS",
+      "language": "sql",
+      "confidence": "medium",
+      "verification": "tool-reported",
+      "evidence": "Parsed with dialect 'ansi'; a parse failure may just mean a different SQL dialect.",
+      "analyzer_version": "sqlfluff, version 4.4.0",
+      "id": "SA-024fbd2a08"
+    },
+    {
+      "analyzer": "ruff",
+      "kind": "lint_warning",
+      "severity": "medium",
+      "message": "`os` imported but unused",
+      "file": "src/good.py",
+      "line": 1,
+      "column": 8,
+      "rule": "F401",
+      "language": "python",
+      "confidence": "high",
+      "verification": "tool-reported",
+      "evidence": "",
+      "analyzer_version": "ruff 0.17.0",
+      "id": "SA-342e538b7a"
+    },
+    {
+      "analyzer": "ruff",
+      "kind": "lint_warning",
+      "severity": "medium",
+      "message": "Undefined name `undefined_name`",
+      "file": "src/good.py",
+      "line": 3,
+      "column": 12,
+      "rule": "F821",
+      "language": "python",
+      "confidence": "high",
+      "verification": "tool-reported",
+      "evidence": "",
+      "analyzer_version": "ruff 0.17.0",
+      "id": "SA-6da66d42ba"
+    },
+    {
+      "analyzer": "pyright",
+      "kind": "type_error",
+      "severity": "medium",
+      "message": "\"undefined_name\" is not defined",
+      "file": "src/good.py",
+      "line": 3,
+      "column": 12,
+      "rule": "reportUndefinedVariable",
+      "language": "python",
+      "confidence": "medium",
+      "verification": "tool-reported",
+      "evidence": "Type-checker result; missing third-party imports are not reported.",
+      "analyzer_version": "pyright 1.1.414",
+      "id": "SA-6dda6d8f7d"
+    }
+  ],
+  "tool_runs": [
+    {
+      "analyzer": "python-ast",
+      "status": "findings",
+      "command": [
+        "ast.parse(<file>)  # in-process"
+      ],
+      "version": "Python 3.12.3 ast",
+      "exit_code": null,
+      "stdout": "",
+      "stderr": "",
+      "duration_s": 0.0,
+      "note": "In-process ast.parse only; no project code is imported or run. Grammar is that of the host interpreter (Python 3.12.3).",
+      "files_checked": 2
+    },
+    {
+      "analyzer": "ruff",
+      "status": "findings",
+      "command": [
+        "/usr/local/bin/ruff",
+        "check",
+        "--isolated",
+        "--no-cache",
+        "--output-format",
+        "json",
+        "--select",
+        "E4,E7,E9,F",
+        "--extend-exclude",
+        "node_modules,venv,.venv,env,__pycache__,.git,build,dist,site-packages",
+        "."
+      ],
+      "version": "ruff 0.17.0",
+      "exit_code": 1,
+      "stdout": "[\n  {\n    \"cell\": null,\n    \"code\": \"invalid-syntax\",\n    \"end_location\": {\n      \"column\": 13,\n      \"row\": 1\n    },\n    \"filename\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n    \"fix\": null,\n    \"location\": {\n      \"column\": 12,\n      \"row\": 1\n    },\n    \"message\": \"Expected a parameter or the end of the parameter list\",\n    \"name\": \"invalid-syntax\",\n    \"noqa_row\": null,\n    \"severity\": \"error\",\n    \"url\": null\n  },\n  {\n    \"cell\": null,\n    \"code\": \"invalid-syntax\",\n    \"end_location\": {\n      \"column\": 1,\n      \"row\": 2\n    },\n    \"filename\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n    \"fix\": null,\n    \"location\": {\n      \"column\": 13,\n      \"row\": 1\n    },\n    \"message\": \"Expected `)`, found newline\",\n    \"name\": \"invalid-syntax\",\n    \"noqa_row\": null,\n    \"severity\": \"error\",\n    \"url\": null\n  },\n  {\n    \"cell\": null,\n    \"code\": \"F401\",\n    \"end_location\": {\n      \"column\": 10,\n      \"row\": 1\n    },\n    \"filename\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/good.py\",\n    \"fix\": {\n      \"applicability\": \"safe\",\n      \"edits\": [\n        {\n          \"content\": \"\",\n          \"end_location\": {\n            \"column\": 1,\n            \"row\": 2\n          },\n          \"location\": {\n            \"column\": 1,\n            \"row\": 1\n          }\n        }\n      ],\n      \"message\": \"Remove unused import: `os`\"\n    },\n    \"location\": {\n      \"column\": 8,\n      \"row\": 1\n    },\n    \"message\": \"`os` imported but unused\",\n    \"name\": \"unused-import\",\n    \"noqa_row\": 1,\n    \"severity\": \"error\",\n    \"url\": \"https://docs.astral.sh/ruff/rules/unused-import\"\n  },\n  {\n    \"cell\": null,\n    \"code\": \"F821\",\n    \"end_location\": {\n      \"column\": 26,\n      \"row\": 3\n    },\n    \"filename\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/good.py\",\n    \"fix\": null,\n    \"location\": {\n      \"column\": 12,\n      \"row\": 3\n    },\n    \"message\": \"Undefined name `undefined_name`\",\n    \"name\": \"undefined-name\",\n    \"noqa_row\": 3,\n    \"severity\": \"error\",\n    \"url\": \"https://docs.astral.sh/ruff/rules/undefined-name\"\n  }\n]",
+      "stderr": "",
+      "duration_s": 0.007,
+      "note": "Run with --isolated: project ruff config is ignored; default rule set.",
+      "files_checked": 2
+    },
+    {
+      "analyzer": "pyright",
+      "status": "findings",
+      "command": [
+        "/usr/local/bin/pyright",
+        "--outputjson",
+        "--project",
+        "/tmp/sa_plugin_pi5fl52n/tools/pyrightconfig.json"
+      ],
+      "version": "pyright 1.1.414",
+      "exit_code": 1,
+      "stdout": "{\n    \"version\": \"1.1.414\",\n    \"time\": \"1791934729789\",\n    \"generalDiagnostics\": [\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"\\\"(\\\" was not closed\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 0,\n                    \"character\": 10\n                },\n                \"end\": {\n                    \"line\": 0,\n                    \"character\": 11\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Expected parameter name\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 0,\n                    \"character\": 11\n                },\n                \"end\": {\n                    \"line\": 0,\n                    \"character\": 12\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Position-only parameter separator not allowed as first parameter\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 0,\n                    \"character\": 11\n                },\n                \"end\": {\n                    \"line\": 1,\n                    \"character\": 8\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Expected expression\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 1,\n                    \"character\": 4\n                },\n                \"end\": {\n                    \"line\": 1,\n                    \"character\": 8\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Expected \\\":\\\"\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 2,\n                    \"character\": 0\n                },\n                \"end\": {\n                    \"line\": 2,\n                    \"character\": 0\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Expected expression\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 2,\n                    \"character\": 0\n                },\n                \"end\": {\n                    \"line\": 2,\n                    \"character\": 0\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/bad.py\",\n            \"severity\": \"error\",\n            \"message\": \"Statements must be separated by newlines or semicolons\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 2,\n                    \"character\": 0\n                },\n                \"end\": {\n                    \"line\": 2,\n                    \"character\": 0\n                }\n            }\n        },\n        {\n            \"file\": \"/tmp/sa_plugin_pi5fl52n/project/proj/src/good.py\",\n            \"severity\": \"error\",\n            \"message\": \"\\\"undefined_name\\\" is not defined\",\n            \"range\": {\n                \"start\": {\n                    \"line\": 2,\n                    \"character\": 11\n                },\n                \"end\": {\n                    \"line\": 2,\n                    \"character\": 25\n                }\n            },\n            \"rule\": \"reportUndefinedVariable\"\n        }\n    ],\n    \"summary\": {\n        \"filesAnalyzed\": 2,\n        \"errorCount\": 8,\n        \"warningCount\": 0,\n        \"informationCount\": 0,\n        \"timeInSec\": 0.675\n    }\n}\n\n",
+      "stderr": "",
+      "duration_s": 1.071,
+      "note": "Basic mode, project pyright config ignored, unresolved imports suppressed.",
+      "files_checked": 2
+    },
+    {
+      "analyzer": "eslint",
+      "status": "findings",
+      "command": [
+        "/tmp/npmt/node_modules/.bin/eslint",
+        "--no-config-lookup",
+        "-c",
+        "/tmp/sa_plugin_pi5fl52n/tools/eslint.config.mjs",
+        "--format",
+        "json",
+        "--no-warn-ignored",
+        "."
+      ],
+      "version": "v9.39.5",
+      "exit_code": 1,
+      "stdout": "[{\"filePath\":\"/tmp/sa_plugin_pi5fl52n/project/proj/src/app.js\",\"messages\":[{\"ruleId\":null,\"nodeType\":null,\"fatal\":true,\"severity\":2,\"message\":\"Parsing error: Identifier 'a' has already been declared\",\"line\":2,\"column\":7}],\"suppressedMessages\":[],\"errorCount\":1,\"fatalErrorCount\":1,\"warningCount\":0,\"fixableErrorCount\":0,\"fixableWarningCount\":0,\"source\":\"const a = 1;\\nconst a = 2;\\nfunction f(){ return 1; console.log(\\\"x\\\"); }\\nlet = = 3;\\n\",\"usedDeprecatedRules\":[]}]\n",
+      "stderr": "",
+      "duration_s": 0.204,
+      "note": "Project ESLint config is ignored and not executed; small built-in rule set. Type-aware and plugin rules are not applied.",
+      "files_checked": 1
+    },
+    {
+      "analyzer": "tsc",
+      "status": "findings",
+      "command": [
+        "/home/claude/.npm-global/bin/tsc",
+        "--pretty",
+        "false",
+        "-p",
+        "/tmp/sa_plugin_pi5fl52n/tools/tsconfig.json"
+      ],
+      "version": "Version 6.0.3",
+      "exit_code": 2,
+      "stdout": "src/app.ts(3,1): error TS1005: ')' expected.\n",
+      "stderr": "",
+      "duration_s": 0.693,
+      "note": "--noEmit using generated tsconfig (no tsconfig.json in project). Dependencies are not installed, so unresolved-module errors are reported with reduced confidence.",
+      "files_checked": 1
+    },
+    {
+      "analyzer": "dotnet-build",
+      "status": "skipped",
+      "command": [],
+      "version": "",
+      "exit_code": null,
+      "stdout": "",
+      "stderr": "",
+      "duration_s": 0.0,
+      "note": "Skipped: 'dotnet build' executes MSBuild targets/tasks and build events from the uploaded project, so it needs explicit approval (Options.approved_tools={'dotnet'}). Without an isolated runner (Phase 4) approved builds run on this machine.",
+      "files_checked": 0
+    },
+    {
+      "analyzer": "javac",
+      "status": "unavailable",
+      "command": [],
+      "version": "",
+      "exit_code": null,
+      "stdout": "",
+      "stderr": "",
+      "duration_s": 0.0,
+      "note": "'javac' was not found on PATH. Nothing was run and nothing was installed. Install a JDK (e.g. Temurin/OpenJDK 17+).",
+      "files_checked": 0
+    },
+    {
+      "analyzer": "sqlfluff",
+      "status": "findings",
+      "command": [
+        "/usr/local/bin/sqlfluff",
+        "lint",
+        "--dialect",
+        "ansi",
+        "--templater",
+        "raw",
+        "--ignore-local-config",
+        "--format",
+        "json",
+        "--nocolor",
+        "--exclude-rules",
+        "layout,capitalisation,aliasing,convention",
+        "."
+      ],
+      "version": "sqlfluff, version 4.4.0",
+      "exit_code": 1,
+      "stdout": "[{\"filepath\": \"src/q.sql\", \"violations\": [{\"start_line_no\": 1, \"start_line_pos\": 1, \"code\": \"PRS\", \"description\": \"Line 1, Position 1: Found unparsable section: 'SELEC * FROM t WHERE;'\", \"name\": \"\", \"warning\": false, \"start_file_pos\": 0, \"end_line_no\": 1, \"end_line_pos\": 22, \"end_file_pos\": 21}], \"statistics\": {\"source_chars\": 22, \"templated_chars\": 22, \"segments\": 14, \"raw_segments\": 12}, \"timings\": {\"templating\": 0.00024882899998601715, \"lexing\": 0.0005305660000090029, \"parsing\": 0.0013423670000065613, \"linting\": 0.0004054130000099576, \"AM01\": 2.9062000010071642e-05, \"AM02\": 1.4317000022856519e-05, \"AM03\": 9.092000027521863e-06, \"AM04\": 6.3670000258753134e-06, \"AM05\": 6.566000024577079e-06, \"AM06\": 6.419999976969848e-06, \"AM07\": 1.2977000039882114e-05, \"AM08\": 5.71000003901645e-06, \"AM09\": 4.6760000032008975e-06, \"JJ01\": 1.1008000001311302e-05, \"OR01\": 5.635999968944816e-06, \"PG01\": 7.197000002179266e-06, \"PG02\": 5.070000042906031e-06, \"RF01\": 5.473999976857158e-06, \"RF02\": 6.4320000205952965e-06, \"RF03\": 5.121000015151367e-06, \"RF04\": 5.493000003298221e-06, \"RF05\": 4.564999983358575e-06, \"RF06\": 4.8929999820757075e-06, \"RF07\": 4.177999983312475e-06, \"ST01\": 4.867000029662449e-06, \"ST02\": 4.109000030894094e-06, \"ST03\": 4.459999956907268e-06, \"ST04\": 4.009999997833802e-06, \"ST05\": 4.560000036235579e-06, \"ST06\": 5.127999997966981e-06, \"ST07\": 5.2849999860882235e-06, \"ST08\": 5.009000005884445e-06, \"ST09\": 4.185000022971508e-06, \"ST10\": 4.606999993939098e-06, \"ST11\": 6.740999992871366e-06, \"ST12\": 1.5038000015010766e-05, \"TQ01\": 6.761000008737028e-06, \"TQ02\": 6.702999996832659e-06, \"TQ03\": 6.8269999928816105e-06, \"TQ04\": 6.294000002071698e-06}}]\n",
+      "stderr": "",
+      "duration_s": 0.462,
+      "note": "Dialect 'ansi', raw templater, project config ignored; style rule groups excluded.",
+      "files_checked": 1
+    }
+  ],
+  "notes": [],
+  "limitations": [
+    "Static analysis only: no uploaded project code is built or run (except an explicitly approved 'dotnet build').",
+    "Findings are tool output or heuristics, not proof of runtime behaviour; verification status is 'tool-reported'.",
+    "Project dependencies are never installed, so unresolved-import/symbol errors may be false positives (lower confidence).",
+    "Project-supplied linter/type-checker configuration is deliberately ignored so it cannot execute code.",
+    "Tool output captured in the report may echo source lines; review before sharing reports externally."
+  ]
+}

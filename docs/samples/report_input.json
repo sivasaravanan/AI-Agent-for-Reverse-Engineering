@@ -1,0 +1,1121 @@
+{
+ "project": {
+  "name": "db_sample_project",
+  "archive": "db_sample_project.zip"
+ },
+ "database_analysis": {
+  "schema_version": "1.0",
+  "plugin_version": "1.0.0",
+  "databases": [
+   {
+    "db": "mysql",
+    "display": "MySQL",
+    "status": "confirmed",
+    "rationale": "connection x2, documentation x1, sql_dialect x1, import x1, dependency x1",
+    "evidence_counts": {
+     "documentation": 1,
+     "sql_dialect": 1,
+     "connection": 2,
+     "import": 1,
+     "dependency": 1
+    },
+    "evidence": [
+     {
+      "db": "mysql",
+      "level": "weak",
+      "kind": "documentation",
+      "file": "db/schema.sql",
+      "line": 1,
+      "detail": "mentioned in a code comment",
+      "snippet": "-- comment mentioning mysql only",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mysql",
+      "level": "strong",
+      "kind": "sql_dialect",
+      "file": "db/seed_mysql.sql",
+      "line": 1,
+      "detail": "dialect-specific SQL: AUTO_INCREMENT (1x in file)",
+      "snippet": "CREATE TABLE t (id INT AUTO_INCREMENT PRIMARY KEY) ENGINE=InnoDB;",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mysql",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "php/conn.php",
+      "line": 1,
+      "detail": "pdo connection setting",
+      "snippet": "PDO('mysql:host=h1.corp.local;dbname=blog', 'bloguser', '****'",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mysql",
+      "level": "strong",
+      "kind": "import",
+      "file": "web/db.js",
+      "line": 1,
+      "detail": "MySQL client imported/used",
+      "snippet": "const mysql = require('mysql2');",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mysql",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "web/db.js",
+      "line": 4,
+      "detail": "url connection setting",
+      "snippet": "mysql://shop:****@mysql.internal.corp:3306/catalog",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mysql",
+      "level": "weak",
+      "kind": "dependency",
+      "file": "web/package.json",
+      "line": 1,
+      "detail": "mysql2 ^3.0 declared in npm manifest",
+      "snippet": "",
+      "scope": "production-or-unknown"
+     }
+    ],
+    "scopes": [
+     "production-or-unknown"
+    ],
+    "notes": [
+     "Configuration found; reachability and credentials were not verified (no live connection is attempted)."
+    ]
+   },
+   {
+    "db": "oracle",
+    "display": "Oracle Database",
+    "status": "confirmed",
+    "rationale": "connection x2, dependency x1",
+    "evidence_counts": {
+     "connection": 2,
+     "dependency": 1
+    },
+    "evidence": [
+     {
+      "db": "oracle",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "java/application.properties",
+      "line": 1,
+      "detail": "jdbc connection setting",
+      "snippet": "jdbc:oracle:thin:@//ora01.corp.local:1521/ORCLPDB1",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "oracle",
+      "level": "strong",
+      "kind": "connection",
+      "file": "java/application.properties",
+      "line": 2,
+      "detail": "config-keys connection setting (database type inferred heuristically)",
+      "snippet": "username=app; password=****",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "oracle",
+      "level": "weak",
+      "kind": "dependency",
+      "file": "java/pom.xml",
+      "line": 1,
+      "detail": "com.oracle.database.jdbc:ojdbc8 21.1 declared in maven manifest",
+      "snippet": "",
+      "scope": "production-or-unknown"
+     }
+    ],
+    "scopes": [
+     "production-or-unknown"
+    ],
+    "notes": [
+     "Configuration found; reachability and credentials were not verified (no live connection is attempted)."
+    ]
+   },
+   {
+    "db": "postgresql",
+    "display": "PostgreSQL",
+    "status": "confirmed",
+    "rationale": "import x2, connection x2, service x1, provider x1, dependency x1",
+    "evidence_counts": {
+     "import": 2,
+     "connection": 2,
+     "service": 1,
+     "provider": 1,
+     "dependency": 1
+    },
+    "evidence": [
+     {
+      "db": "postgresql",
+      "level": "strong",
+      "kind": "import",
+      "file": "app/main.py",
+      "line": 1,
+      "detail": "PostgreSQL driver imported/used",
+      "snippet": "import psycopg2",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "app/main.py",
+      "line": 11,
+      "detail": "url connection setting",
+      "snippet": "postgresql://appuser:****@db.internal.corp:5432/shop",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "docker-compose.yml",
+      "line": 5,
+      "detail": "config-keys connection setting",
+      "snippet": "password=****; user=app",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "strong",
+      "kind": "service",
+      "file": "docker-compose.yml",
+      "line": 3,
+      "detail": "container image 'postgres' defines a PostgreSQL service",
+      "snippet": "image: postgres:16",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "strong",
+      "kind": "import",
+      "file": "go/main.go",
+      "line": 2,
+      "detail": "pq/pgx driver imported/used",
+      "snippet": "import _ \"github.com/lib/pq\"",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "confirmed",
+      "kind": "provider",
+      "file": "go/main.go",
+      "line": 3,
+      "detail": "Go database/sql driver name selects PostgreSQL",
+      "snippet": "func main(){ sql.Open(\"postgres\", \"x\") }",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "postgresql",
+      "level": "weak",
+      "kind": "dependency",
+      "file": "requirements.txt",
+      "line": 1,
+      "detail": "psycopg2-binary ==2.9.9 declared in pip manifest",
+      "snippet": "",
+      "scope": "production-or-unknown"
+     }
+    ],
+    "scopes": [
+     "production-or-unknown"
+    ],
+    "notes": [
+     "Configuration found; reachability and credentials were not verified (no live connection is attempted)."
+    ]
+   },
+   {
+    "db": "sqlserver",
+    "display": "Microsoft SQL Server",
+    "status": "confirmed",
+    "rationale": "sql_dialect x3, dependency x1, provider x1, connection x1",
+    "evidence_counts": {
+     "sql_dialect": 3,
+     "dependency": 1,
+     "provider": 1,
+     "connection": 1
+    },
+    "evidence": [
+     {
+      "db": "sqlserver",
+      "level": "strong",
+      "kind": "sql_dialect",
+      "file": "db/schema.sql",
+      "line": 3,
+      "detail": "dialect-specific SQL: IDENTITY(seed,inc) (1x in file)",
+      "snippet": "id INT IDENTITY(1,1) PRIMARY KEY,",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "sqlserver",
+      "level": "strong",
+      "kind": "sql_dialect",
+      "file": "db/schema.sql",
+      "line": 5,
+      "detail": "dialect-specific SQL: NVARCHAR (1x in file)",
+      "snippet": "title NVARCHAR(100)",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "sqlserver",
+      "level": "strong",
+      "kind": "sql_dialect",
+      "file": "db/schema.sql",
+      "line": 7,
+      "detail": "dialect-specific SQL: GO batch separator (1x in file)",
+      "snippet": "GO",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "sqlserver",
+      "level": "weak",
+      "kind": "dependency",
+      "file": "dotnet/App.csproj",
+      "line": 1,
+      "detail": "microsoft.entityframeworkcore.sqlserver 8.0.0 declared in nuget manifest",
+      "snippet": "",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "sqlserver",
+      "level": "confirmed",
+      "kind": "provider",
+      "file": "dotnet/Ctx.cs",
+      "line": 4,
+      "detail": "EF Core provider UseSqlServer() selects Microsoft SQL Server",
+      "snippet": "protected override void OnConfiguring(DbContextOptionsBuilder b) => b.UseSqlServer(cs);",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "sqlserver",
+      "level": "confirmed",
+      "kind": "connection",
+      "file": "dotnet/appsettings.json",
+      "line": 1,
+      "detail": "ado connection setting",
+      "snippet": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+      "scope": "production-or-unknown"
+     }
+    ],
+    "scopes": [
+     "production-or-unknown"
+    ],
+    "notes": [
+     "Configuration found; reachability and credentials were not verified (no live connection is attempted)."
+    ]
+   },
+   {
+    "db": "mongodb",
+    "display": "MongoDB",
+    "status": "strong",
+    "rationale": "documentation x1, import x1, dependency x1",
+    "evidence_counts": {
+     "documentation": 1,
+     "import": 1,
+     "dependency": 1
+    },
+    "evidence": [
+     {
+      "db": "mongodb",
+      "level": "weak",
+      "kind": "documentation",
+      "file": "README.md",
+      "line": 1,
+      "detail": "mentioned in documentation",
+      "snippet": "We might move to MongoDB later.",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mongodb",
+      "level": "strong",
+      "kind": "import",
+      "file": "web/db.js",
+      "line": 2,
+      "detail": "MongoDB client imported/used",
+      "snippet": "const m = require('mongoose');",
+      "scope": "production-or-unknown"
+     },
+     {
+      "db": "mongodb",
+      "level": "weak",
+      "kind": "dependency",
+      "file": "web/package.json",
+      "line": 1,
+      "detail": "mongoose ^7 declared in npm manifest",
+      "snippet": "",
+      "scope": "production-or-unknown"
+     }
+    ],
+    "scopes": [
+     "production-or-unknown"
+    ],
+    "notes": []
+   }
+  ],
+  "dependencies": [
+   {
+    "name": "microsoft.entityframeworkcore.sqlserver",
+    "version": "8.0.0",
+    "role": "driver",
+    "db": "sqlserver",
+    "file": "dotnet/App.csproj",
+    "line": 1,
+    "ecosystem": "nuget",
+    "dev": false
+   },
+   {
+    "name": "microsoft.entityframeworkcore",
+    "version": "8.0.0",
+    "role": "orm",
+    "db": null,
+    "file": "dotnet/App.csproj",
+    "line": 1,
+    "ecosystem": "nuget",
+    "dev": false
+   },
+   {
+    "name": "com.oracle.database.jdbc:ojdbc8",
+    "version": "21.1",
+    "role": "driver",
+    "db": "oracle",
+    "file": "java/pom.xml",
+    "line": 1,
+    "ecosystem": "maven",
+    "dev": false
+   },
+   {
+    "name": "psycopg2-binary",
+    "version": "==2.9.9",
+    "role": "driver",
+    "db": "postgresql",
+    "file": "requirements.txt",
+    "line": 1,
+    "ecosystem": "pip",
+    "dev": false
+   },
+   {
+    "name": "sqlalchemy",
+    "version": ">=2.0",
+    "role": "orm",
+    "db": null,
+    "file": "requirements.txt",
+    "line": 2,
+    "ecosystem": "pip",
+    "dev": false
+   },
+   {
+    "name": "alembic",
+    "version": "",
+    "role": "migration",
+    "db": null,
+    "file": "requirements.txt",
+    "line": 3,
+    "ecosystem": "pip",
+    "dev": false
+   },
+   {
+    "name": "mysql2",
+    "version": "^3.0",
+    "role": "driver",
+    "db": "mysql",
+    "file": "web/package.json",
+    "line": 1,
+    "ecosystem": "npm",
+    "dev": false
+   },
+   {
+    "name": "mongoose",
+    "version": "^7",
+    "role": "driver",
+    "db": "mongodb",
+    "file": "web/package.json",
+    "line": 1,
+    "ecosystem": "npm",
+    "dev": false
+   }
+  ],
+  "connections": [
+   {
+    "db": "postgresql",
+    "display": "PostgreSQL",
+    "level": "confirmed",
+    "kind": "url",
+    "file": "app/main.py",
+    "line": 11,
+    "scope": "production-or-unknown",
+    "redacted": "postgresql://appuser:****@db.internal.corp:5432/shop",
+    "host": "db.internal.corp",
+    "port": "5432",
+    "database": "shop",
+    "user": "appuser",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   },
+   {
+    "db": "postgresql",
+    "display": "PostgreSQL",
+    "level": "confirmed",
+    "kind": "config-keys",
+    "file": "docker-compose.yml",
+    "line": 5,
+    "scope": "production-or-unknown",
+    "redacted": "password=****; user=app",
+    "host": null,
+    "port": null,
+    "database": null,
+    "user": "app",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   },
+   {
+    "db": "sqlserver",
+    "display": "Microsoft SQL Server",
+    "level": "confirmed",
+    "kind": "ado",
+    "file": "dotnet/appsettings.json",
+    "line": 1,
+    "scope": "production-or-unknown",
+    "redacted": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+    "host": "sql01.corp.local",
+    "port": "1433",
+    "database": "Shop",
+    "user": "svc_shop",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": true,
+    "env_vars": []
+   },
+   {
+    "db": "oracle",
+    "display": "Oracle Database",
+    "level": "confirmed",
+    "kind": "jdbc",
+    "file": "java/application.properties",
+    "line": 1,
+    "scope": "production-or-unknown",
+    "redacted": "jdbc:oracle:thin:@//ora01.corp.local:1521/ORCLPDB1",
+    "host": "ora01.corp.local",
+    "port": "1521",
+    "database": "ORCLPDB1",
+    "user": null,
+    "password_inline": false,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   },
+   {
+    "db": "oracle",
+    "display": "Oracle Database",
+    "level": "strong",
+    "kind": "config-keys",
+    "file": "java/application.properties",
+    "line": 2,
+    "scope": "production-or-unknown",
+    "redacted": "username=app; password=****",
+    "host": null,
+    "port": null,
+    "database": null,
+    "user": "app",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   },
+   {
+    "db": "mysql",
+    "display": "MySQL",
+    "level": "confirmed",
+    "kind": "pdo",
+    "file": "php/conn.php",
+    "line": 1,
+    "scope": "production-or-unknown",
+    "redacted": "PDO('mysql:host=h1.corp.local;dbname=blog', 'bloguser', '****'",
+    "host": "h1.corp.local",
+    "port": null,
+    "database": "blog",
+    "user": "bloguser",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   },
+   {
+    "db": "mysql",
+    "display": "MySQL",
+    "level": "confirmed",
+    "kind": "url",
+    "file": "web/db.js",
+    "line": 4,
+    "scope": "production-or-unknown",
+    "redacted": "mysql://shop:****@mysql.internal.corp:3306/catalog",
+    "host": "mysql.internal.corp",
+    "port": "3306",
+    "database": "catalog",
+    "user": "shop",
+    "password_inline": true,
+    "placeholder": false,
+    "tls_disabled": false,
+    "env_vars": []
+   }
+  ],
+  "schema_objects": [
+   {
+    "kind": "table",
+    "name": "users",
+    "file": "alembic/versions/0001_init.py",
+    "line": null,
+    "source": "migration",
+    "columns": [],
+    "references": []
+   },
+   {
+    "kind": "table",
+    "name": "users",
+    "file": "app/main.py",
+    "line": 6,
+    "source": "orm",
+    "columns": [],
+    "references": []
+   },
+   {
+    "kind": "table",
+    "name": "orders",
+    "file": "db/schema.sql",
+    "line": 2,
+    "source": "sql",
+    "columns": [
+     "id",
+     "customer_id",
+     "title"
+    ],
+    "references": [
+     "customers"
+    ]
+   },
+   {
+    "kind": "table",
+    "name": "t",
+    "file": "db/seed_mysql.sql",
+    "line": 1,
+    "source": "sql",
+    "columns": [
+     "id"
+    ],
+    "references": []
+   },
+   {
+    "kind": "table",
+    "name": "Order",
+    "file": "dotnet/Ctx.cs",
+    "line": 3,
+    "source": "orm",
+    "columns": [],
+    "references": []
+   },
+   {
+    "kind": "table",
+    "name": "customers",
+    "file": "java/Customer.java",
+    "line": 4,
+    "source": "orm",
+    "columns": [],
+    "references": []
+   },
+   {
+    "kind": "collection",
+    "name": "Cat",
+    "file": "web/db.js",
+    "line": 3,
+    "source": "orm",
+    "columns": [],
+    "references": []
+   }
+  ],
+  "orm_entities": [
+   {
+    "orm": "SQLAlchemy",
+    "name": "User",
+    "table": "users",
+    "file": "app/main.py",
+    "line": 6,
+    "fields": 2,
+    "detail": ""
+   },
+   {
+    "orm": "EF Core DbContext",
+    "name": "ShopCtx",
+    "table": null,
+    "file": "dotnet/Ctx.cs",
+    "line": 2,
+    "fields": null,
+    "detail": "context class"
+   },
+   {
+    "orm": "EF Core",
+    "name": "Order",
+    "table": null,
+    "file": "dotnet/Ctx.cs",
+    "line": 3,
+    "fields": null,
+    "detail": "DbSet property 'Orders'"
+   },
+   {
+    "orm": "JPA/Hibernate",
+    "name": "Customer",
+    "table": "customers",
+    "file": "java/Customer.java",
+    "line": 4,
+    "fields": null,
+    "detail": ""
+   },
+   {
+    "orm": "Mongoose (MongoDB ODM)",
+    "name": "Cat",
+    "table": null,
+    "file": "web/db.js",
+    "line": 3,
+    "fields": null,
+    "detail": ""
+   }
+  ],
+  "migrations": [
+   {
+    "tool": "Alembic",
+    "file": "alembic/versions/0001_init.py",
+    "version": "0001_init",
+    "creates": [
+     "users"
+    ]
+   }
+  ],
+  "sql_scripts": [
+   {
+    "file": "db/schema.sql",
+    "purpose": "schema",
+    "statements": {
+     "create_table": 1,
+     "insert": 0,
+     "drop": 0,
+     "routines": 0
+    },
+    "dialect_hints": {
+     "sqlserver": 3
+    }
+   },
+   {
+    "file": "db/seed_mysql.sql",
+    "purpose": "mixed",
+    "statements": {
+     "create_table": 1,
+     "insert": 1,
+     "drop": 0,
+     "routines": 0
+    },
+    "dialect_hints": {
+     "mysql": 2
+    }
+   }
+  ],
+  "env_references": [
+   {
+    "name": "POSTGRES_PASSWORD",
+    "kind": "definition",
+    "file": "docker-compose.yml",
+    "line": 5
+   },
+   {
+    "name": "POSTGRES_USER",
+    "kind": "definition",
+    "file": "docker-compose.yml",
+    "line": 6
+   }
+  ],
+  "findings": [
+   {
+    "id": "DBA-0001",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "app/main.py",
+    "line": 11,
+    "column": null,
+    "evidence": "postgresql://appuser:****@db.internal.corp:5432/shop",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "postgresql"
+   },
+   {
+    "id": "DBA-0002",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "docker-compose.yml",
+    "line": 5,
+    "column": null,
+    "evidence": "password=****; user=app",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "postgresql"
+   },
+   {
+    "id": "DBA-0003",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "dotnet/appsettings.json",
+    "line": 1,
+    "column": null,
+    "evidence": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "sqlserver"
+   },
+   {
+    "id": "DBA-0004",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "java/application.properties",
+    "line": 2,
+    "column": null,
+    "evidence": "username=app; password=****",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "oracle"
+   },
+   {
+    "id": "DBA-0005",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "php/conn.php",
+    "line": 1,
+    "column": null,
+    "evidence": "PDO('mysql:host=h1.corp.local;dbname=blog', 'bloguser', '****'",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "mysql"
+   },
+   {
+    "id": "DBA-0006",
+    "rule": "DB-SEC-001",
+    "severity": "high",
+    "category": "database-security",
+    "title": "Hard-coded database credential",
+    "file": "web/db.js",
+    "line": 4,
+    "column": null,
+    "evidence": "mysql://shop:****@mysql.internal.corp:3306/catalog",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "mysql"
+   },
+   {
+    "id": "DBA-0007",
+    "rule": "DB-SEC-003",
+    "severity": "medium",
+    "category": "database-security",
+    "title": "SQL built by string concatenation/interpolation (heuristic)",
+    "file": "app/main.py",
+    "line": 13,
+    "column": null,
+    "evidence": "cur.execute(f\"SELECT * FROM users WHERE id={uid}\")",
+    "explanation": "A SQL statement appears to be assembled from variables instead of bound parameters. If any part is user-controlled this allows SQL injection. This is a pattern match only - it has NOT been confirmed as exploitable.",
+    "remediation": "Use parameterised queries / prepared statements or the ORM's query builder.",
+    "source": "database_analysis",
+    "confidence": "low",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": null
+   },
+   {
+    "id": "DBA-0008",
+    "rule": "DB-SEC-004",
+    "severity": "low",
+    "category": "database-security",
+    "title": "Transport encryption / certificate validation disabled",
+    "file": "dotnet/appsettings.json",
+    "line": 1,
+    "column": null,
+    "evidence": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+    "explanation": "The connection to a non-local host disables TLS or certificate validation, exposing credentials and data to interception.",
+    "remediation": "Enable TLS (e.g. sslmode=require/verify-full, Encrypt=True) and validate server certificates.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "sqlserver"
+   },
+   {
+    "id": "DBA-0009",
+    "rule": "DB-CFG-003",
+    "severity": "info",
+    "category": "database-config",
+    "title": "Multiple database technologies detected",
+    "file": null,
+    "line": null,
+    "column": null,
+    "evidence": "MySQL, Oracle Database, PostgreSQL, Microsoft SQL Server, MongoDB",
+    "explanation": "Evidence for several databases was found: MySQL, Oracle Database, PostgreSQL, Microsoft SQL Server, MongoDB. This is normal for polyglot systems but worth confirming (e.g. SQLite in tests, PostgreSQL in production).",
+    "remediation": "Confirm which database each environment uses.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": null
+   },
+   {
+    "id": "DBA-0010",
+    "rule": "DB-CFG-001",
+    "severity": "info",
+    "category": "database-config",
+    "title": "MongoDB: driver used but no connection configuration found",
+    "file": "web/db.js",
+    "line": 2,
+    "column": null,
+    "evidence": "const m = require('mongoose');",
+    "explanation": "The code imports a database driver but no connection string, provider setting or config keys were found in the scanned files. Configuration may be supplied at deployment (environment variables, secret store) or be missing.",
+    "remediation": "Document the required settings (e.g. in .env.example) and verify them in the target environment.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "db": "mongodb"
+   }
+  ],
+  "stats": {
+   "files_total": 17,
+   "files_scanned": 17,
+   "bytes_scanned": 2320,
+   "category_docs": 1,
+   "category_source": 7,
+   "category_sql": 2,
+   "category_docker": 1,
+   "category_manifest": 4,
+   "category_config": 2,
+   "elapsed_ms": 5,
+   "generated_at": "2026-10-14T05:06:06+00:00"
+  },
+  "skipped": {},
+  "limitations": [
+   "Static text analysis only: no project code is executed and no database connection is ever attempted.",
+   "'confirmed' means explicit configuration was found - not that the database is reachable, that credentials work, or that the code path is exercised at runtime.",
+   "Comments are skipped using simple per-language rules; string literals and docstrings are not distinguished from code, so a connection string inside a docstring can still be reported.",
+   "Files larger than the configured size limit, binary files (except SQLite file headers), and third-party folders (node_modules, venv, vendor, bin/obj, ...) are not scanned.",
+   "Dialect detection from SQL keywords is heuristic; ORM entity discovery covers common patterns only.",
+   "SQLite/SQL Server data files are detected by name/header but their contents are never opened or parsed."
+  ],
+  "cancelled": false,
+  "findings_phase6": [
+   {
+    "id": "DBA-0001",
+    "severity": "high",
+    "category": "database-security",
+    "file": "app/main.py",
+    "line": 11,
+    "column": null,
+    "evidence": "postgresql://appuser:****@db.internal.corp:5432/shop",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "postgresql"
+   },
+   {
+    "id": "DBA-0002",
+    "severity": "high",
+    "category": "database-security",
+    "file": "docker-compose.yml",
+    "line": 5,
+    "column": null,
+    "evidence": "password=****; user=app",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "postgresql"
+   },
+   {
+    "id": "DBA-0003",
+    "severity": "high",
+    "category": "database-security",
+    "file": "dotnet/appsettings.json",
+    "line": 1,
+    "column": null,
+    "evidence": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "sqlserver"
+   },
+   {
+    "id": "DBA-0004",
+    "severity": "high",
+    "category": "database-security",
+    "file": "java/application.properties",
+    "line": 2,
+    "column": null,
+    "evidence": "username=app; password=****",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "oracle"
+   },
+   {
+    "id": "DBA-0005",
+    "severity": "high",
+    "category": "database-security",
+    "file": "php/conn.php",
+    "line": 1,
+    "column": null,
+    "evidence": "PDO('mysql:host=h1.corp.local;dbname=blog', 'bloguser', '****'",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "mysql"
+   },
+   {
+    "id": "DBA-0006",
+    "severity": "high",
+    "category": "database-security",
+    "file": "web/db.js",
+    "line": 4,
+    "column": null,
+    "evidence": "mysql://shop:****@mysql.internal.corp:3306/catalog",
+    "explanation": "A database password is written directly in the project files. Anyone with access to the source or archive can read it. The value is masked in this report.",
+    "remediation": "Move the secret to an environment variable or secret manager, rotate the exposed password, and keep only a placeholder in committed files.",
+    "source": "database_analysis",
+    "confidence": "high",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-001",
+    "title": "Hard-coded database credential",
+    "database": "mysql"
+   },
+   {
+    "id": "DBA-0007",
+    "severity": "medium",
+    "category": "database-security",
+    "file": "app/main.py",
+    "line": 13,
+    "column": null,
+    "evidence": "cur.execute(f\"SELECT * FROM users WHERE id={uid}\")",
+    "explanation": "A SQL statement appears to be assembled from variables instead of bound parameters. If any part is user-controlled this allows SQL injection. This is a pattern match only - it has NOT been confirmed as exploitable.",
+    "remediation": "Use parameterised queries / prepared statements or the ORM's query builder.",
+    "source": "database_analysis",
+    "confidence": "low",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-003",
+    "title": "SQL built by string concatenation/interpolation (heuristic)",
+    "database": null
+   },
+   {
+    "id": "DBA-0008",
+    "severity": "low",
+    "category": "database-security",
+    "file": "dotnet/appsettings.json",
+    "line": 1,
+    "column": null,
+    "evidence": "Server=sql01.corp.local,1433;Database=Shop;User Id=svc_shop;Password=****;TrustServerCertificate=True;",
+    "explanation": "The connection to a non-local host disables TLS or certificate validation, exposing credentials and data to interception.",
+    "remediation": "Enable TLS (e.g. sslmode=require/verify-full, Encrypt=True) and validate server certificates.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-SEC-004",
+    "title": "Transport encryption / certificate validation disabled",
+    "database": "sqlserver"
+   },
+   {
+    "id": "DBA-0009",
+    "severity": "info",
+    "category": "database-config",
+    "file": null,
+    "line": null,
+    "column": null,
+    "evidence": "MySQL, Oracle Database, PostgreSQL, Microsoft SQL Server, MongoDB",
+    "explanation": "Evidence for several databases was found: MySQL, Oracle Database, PostgreSQL, Microsoft SQL Server, MongoDB. This is normal for polyglot systems but worth confirming (e.g. SQLite in tests, PostgreSQL in production).",
+    "remediation": "Confirm which database each environment uses.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-CFG-003",
+    "title": "Multiple database technologies detected",
+    "database": null
+   },
+   {
+    "id": "DBA-0010",
+    "severity": "info",
+    "category": "database-config",
+    "file": "web/db.js",
+    "line": 2,
+    "column": null,
+    "evidence": "const m = require('mongoose');",
+    "explanation": "The code imports a database driver but no connection string, provider setting or config keys were found in the scanned files. Configuration may be supplied at deployment (environment variables, secret store) or be missing.",
+    "remediation": "Document the required settings (e.g. in .env.example) and verify them in the target environment.",
+    "source": "database_analysis",
+    "confidence": "medium",
+    "verification_status": "static-detected; not verified at runtime",
+    "rule": "DB-CFG-001",
+    "title": "MongoDB: driver used but no connection configuration found",
+    "database": "mongodb"
+   }
+  ]
+ },
+ "limitations": [
+  "Static text analysis only: no project code is executed and no database connection is ever attempted.",
+  "'confirmed' means explicit configuration was found - not that the database is reachable, that credentials work, or that the code path is exercised at runtime.",
+  "Comments are skipped using simple per-language rules; string literals and docstrings are not distinguished from code, so a connection string inside a docstring can still be reported.",
+  "Files larger than the configured size limit, binary files (except SQLite file headers), and third-party folders (node_modules, venv, vendor, bin/obj, ...) are not scanned.",
+  "Dialect detection from SQL keywords is heuristic; ORM entity discovery covers common patterns only.",
+  "SQLite/SQL Server data files are detected by name/header but their contents are never opened or parsed."
+ ],
+ "inventory": {
+  "totals": {
+   "files_scanned": 17
+  }
+ }
+}
