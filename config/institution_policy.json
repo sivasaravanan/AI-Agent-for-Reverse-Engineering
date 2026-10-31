@@ -1,0 +1,3 @@
+{
+  "_readme": "Institution policy for the prerequisite installer. Delete this line and add ONLY the keys your institution wants to enforce - every key present here becomes read-only in the app. Machine-wide policy (%ProgramData%\\AISoftwareEngineeringAgent\\policy.json, /etc/aisea/policy.json) overrides this file. Keys and examples: docs/PREREQUISITES.md."
+}

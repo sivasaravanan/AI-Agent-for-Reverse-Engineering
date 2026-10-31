@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "general":    {"description": "Balanced default for any institution.", "max_critical": 0, "max_high": 5,  "max_secrets": 0, "max_syntax_errors": 0, "similarity_review_at": 0.80},
+    "education":  {"description": "Student work: tolerate rough edges, flag copied submissions strongly.", "max_critical": 0, "max_high": 15, "max_secrets": 0, "max_syntax_errors": 3, "similarity_review_at": 0.70},
+    "enterprise": {"description": "Internal/vendor deliveries: strict on security findings.", "max_critical": 0, "max_high": 2,  "max_secrets": 0, "max_syntax_errors": 0, "similarity_review_at": 0.90},
+    "government": {"description": "Contractor submissions: zero tolerance for critical/high and secrets.", "max_critical": 0, "max_high": 0,  "max_secrets": 0, "max_syntax_errors": 0, "similarity_review_at": 0.90}
+  }
+}

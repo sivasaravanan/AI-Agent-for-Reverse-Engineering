@@ -1,0 +1,18 @@
+# Preview image for GUI apps (Tkinter / pygame / ...) shown on a virtual screen by the App Preview panel.
+# Build it ONCE on your computer (the panel never pulls or builds images by itself):
+#     docker build -t ase-preview-gui:latest -f app_preview/images/Dockerfile.gui app_preview/images
+#   (Podman / nerdctl / Finch: same command with that program name.) The panel's "Prepare GUI preview image" button, the
+#   scripts/build_preview_image.* helpers and `python -m app_preview --build-gui-image` run exactly this, after you approve it.
+ARG BASE_IMAGE=python:3.12-slim
+FROM ${BASE_IMAGE}
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends xvfb xdotool imagemagick libtk8.6 tk fonts-dejavu-core openbox \
+ && rm -rf /var/lib/apt/lists/*
+# Fail the build (instead of failing later at run time) if Tk is not usable from this Python.
+RUN python -c "import tkinter; print('tkinter OK', tkinter.TkVersion)"
+# Fail the build (instead of showing a black screen later) if the virtual screen cannot be captured from inside the container.
+RUN sh -c 'Xvfb :99 -screen 0 320x200x24 -nolisten tcp >/dev/null 2>&1 & XP=$!; i=0; \
+    while [ ! -S /tmp/.X11-unix/X99 ] && [ $i -lt 50 ]; do i=$((i+1)); sleep 0.1; done; \
+    DISPLAY=:99 import -silent -window root png:/tmp/ase-check.png; R=$?; kill $XP; \
+    test $R -eq 0 && test -s /tmp/ase-check.png && rm -rf /tmp/ase-check.png /tmp/.X11-unix/X99 && echo "screen capture OK"'
+ENV PYTHONUNBUFFERED=1

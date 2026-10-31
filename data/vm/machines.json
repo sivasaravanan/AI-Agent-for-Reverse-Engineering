@@ -1,0 +1,170 @@
+{
+ "version": 1,
+ "machines": [
+  {
+   "id": "311d507be290",
+   "name": "tkinter app (main.py) [TKinter Designer]",
+   "description": "",
+   "source": "D:/AIProjects/Development/TKinter Designer",
+   "mode": "run",
+   "entry": {
+    "id": "custom:python",
+    "title": "python main.py",
+    "kind": "gui",
+    "ecosystem": "python",
+    "argv": [
+     "python",
+     "main.py"
+    ],
+    "file": "",
+    "line": 0,
+    "port": null,
+    "description": "User-supplied command",
+    "env": {
+     "PYTHONDONTWRITEBYTECODE": "1",
+     "PIP_CACHE_DIR": "/tmp/pip-cache",
+     "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+    },
+    "needs_network": false,
+    "install": null,
+    "risks": [
+     "The command was typed by the user and is not derived from the project."
+    ],
+    "notes": []
+   },
+   "settings": {
+    "screen": "1024x768",
+    "fps": 2.0,
+    "view": "fit",
+    "timeout_s": 900,
+    "max_workspace_mb": 500,
+    "memory_mb": 1536,
+    "cpus": 1.0,
+    "pids": 256,
+    "install": false,
+    "link_output": true,
+    "stop_entry": true,
+    "backend": "auto",
+    "custom_exe": "",
+    "image": "",
+    "auto_snapshot_end": false
+   },
+   "created": 1792459206.1065247,
+   "last_started": 1792660932.1067295,
+   "last_status": "cancelled",
+   "runs": 4
+  },
+  {
+   "id": "dff507782341",
+   "name": "test machine",
+   "description": "",
+   "source": "D:/AIProjects/Development/TKinter Designer",
+   "mode": "run",
+   "entry": {
+    "id": "python:src/app_viewer.py:gui",
+    "title": "tkinter app (src/app_viewer.py)",
+    "kind": "gui",
+    "ecosystem": "python",
+    "argv": [
+     "python",
+     "src/app_viewer.py"
+    ],
+    "file": "src/app_viewer.py",
+    "line": 435,
+    "port": null,
+    "description": "Desktop GUI shown on a virtual screen (needs the preview GUI image)",
+    "env": {
+     "PYTHONDONTWRITEBYTECODE": "1",
+     "PIP_CACHE_DIR": "/tmp/pip-cache",
+     "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+     "PYTHONPATH": "/tmp/ase-site"
+    },
+    "needs_network": true,
+    "install": [
+     "pip",
+     "install",
+     "--no-input",
+     "-q",
+     "--target",
+     "/tmp/ase-site",
+     "-r",
+     "requirements.txt"
+    ],
+    "risks": [],
+    "notes": []
+   },
+   "settings": {
+    "screen": "800x600",
+    "fps": 2.0,
+    "view": "fit",
+    "timeout_s": 900,
+    "max_workspace_mb": 500,
+    "memory_mb": 1536,
+    "cpus": 1.0,
+    "pids": 256,
+    "install": true,
+    "link_output": true,
+    "stop_entry": true,
+    "backend": "auto",
+    "custom_exe": "",
+    "image": "",
+    "auto_snapshot_end": false
+   },
+   "created": 1792461968.844339,
+   "last_started": 1792579244.3895385,
+   "last_status": "cancelled",
+   "runs": 4
+  },
+  {
+   "id": "a069dea84bb4",
+   "name": "tkinter app (WhatsApp/whatsapp_hub.py)",
+   "description": "",
+   "source": "D:/AI For .Net/New Tools",
+   "mode": "run",
+   "entry": {
+    "id": "python:WhatsApp/whatsapp_hub.py:gui",
+    "title": "tkinter app (WhatsApp/whatsapp_hub.py)",
+    "kind": "gui",
+    "ecosystem": "python",
+    "argv": [
+     "python",
+     "WhatsApp/whatsapp_hub.py"
+    ],
+    "file": "WhatsApp/whatsapp_hub.py",
+    "line": 4766,
+    "port": null,
+    "description": "Desktop GUI shown on a virtual screen (needs the preview GUI image)",
+    "env": {
+     "PYTHONDONTWRITEBYTECODE": "1",
+     "PIP_CACHE_DIR": "/tmp/pip-cache",
+     "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+    },
+    "needs_network": false,
+    "install": null,
+    "risks": [],
+    "notes": []
+   },
+   "settings": {
+    "screen": "1920x1080",
+    "fps": 2.0,
+    "view": "fit",
+    "timeout_s": 900,
+    "max_workspace_mb": 500,
+    "memory_mb": 1536,
+    "cpus": 1.0,
+    "pids": 256,
+    "install": false,
+    "link_output": true,
+    "stop_entry": true,
+    "backend": "auto",
+    "custom_exe": "",
+    "image": "",
+    "auto_snapshot_end": false
+   },
+   "created": 1792578924.5306876,
+   "last_started": 1792661017.099356,
+   "last_status": "running",
+   "runs": 3
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "output_dir": "reports",
+  "history_enabled": true,
+  "max_history": 200,
+  "show_dashboard_after_analysis": true,
+  "limits": {
+    "max_files": 20000,
+    "max_total_uncompressed_mb": 1024,
+    "max_member_mb": 100,
+    "max_text_file_kb": 1024,
+    "max_compression_ratio": 200,
+    "max_scanned_files": 5000
+  },
+  "ai": {
+    "enabled": false,
+    "limits": {
+      "max_requests": 50,
+      "max_total_tokens": 200000,
+      "max_prompt_chars": 120000,
+      "max_item_bytes": 24000,
+      "max_total_bytes": 80000
+    },
+    "task_routes": {
+      "default": [
+        "ollama",
+        "openai_compatible",
+        "openrouter"
+      ]
+    },
+    "providers": [
+      {
+        "name": "ollama",
+        "kind": "ollama",
+        "enabled": true,
+        "base_url": "http://localhost:11434",
+        "model": "",
+        "fallback_models": [],
+        "timeout_seconds": 120,
+        "max_retries": 1,
+        "max_tokens": 1024,
+        "api_key_env": ""
+      },
+      {
+        "name": "openai_compatible",
+        "kind": "openai_compatible",
+        "enabled": false,
+        "base_url": "https://api.openai.com/v1",
+        "model": "",
+        "fallback_models": [],
+        "timeout_seconds": 60,
+        "max_retries": 2,
+        "max_tokens": 1024,
+        "api_key_env": "OPENAI_API_KEY"
+      },
+      {
+        "name": "openrouter",
+        "kind": "openrouter",
+        "enabled": false,
+        "base_url": "https://openrouter.ai/api/v1",
+        "model": "",
+        "fallback_models": [],
+        "timeout_seconds": 60,
+        "max_retries": 2,
+        "max_tokens": 1024,
+        "api_key_env": "OPENROUTER_API_KEY"
+      }
+    ]
+  },
+  "note": "API keys are never stored here. 'api_key_env' is the NAME of an environment variable."
+}
