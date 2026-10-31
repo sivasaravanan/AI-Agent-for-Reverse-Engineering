@@ -1,0 +1,3 @@
+# sorads-build-id: d353582cbddb
+# Libraries of AI Software Engineering Agent - downloaded into the environment folder at first run.
+pytest==9.1.1
