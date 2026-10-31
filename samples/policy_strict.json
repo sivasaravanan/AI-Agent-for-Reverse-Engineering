@@ -1,0 +1,13 @@
+{
+  "name": "institution-baseline",
+  "max_critical": 0,
+  "max_high": 0,
+  "max_medium": 10,
+  "forbid_secrets": true,
+  "forbid_copyleft": false,
+  "forbid_licenses": ["AGPL-3.0"],
+  "require_project_license": false,
+  "max_hotspots": null,
+  "min_confidence_for_gate": "low",
+  "allow_rules": []
+}
